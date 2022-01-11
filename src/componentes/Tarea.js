@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckSquare,
   faEdit,
+  faSquare,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Esta obteniendo la tarea que se creo dentro del map del componente "ListaTareas", no confundir con el estado "tareas"
 // Recomendacion: Llamar de otra forma a los estados para que no genere confusion
-const Tarea = ({ tarea }) => {
+const Tarea = ({ tarea, toggleCompletada }) => {
   // Estado para manipular el boton de actualizar, tendra como valor por default 'false'
   const [editandoTarea, cambiarEditandoTarea] = useState(false);
 
@@ -23,8 +24,10 @@ const Tarea = ({ tarea }) => {
   return (
     <li className="lista-tareas__tarea">
       <FontAwesomeIcon
-        icon={faCheckSquare}
+        icon={tarea.completada ? faCheckSquare : faSquare}
         className="lista-tareas__icono lista-tareas__icono-check"
+        // Función para capturar el id al cual se le esta haciendo click ya que son varias tareas y es un icono no un input
+        onClick={() => toggleCompletada(tarea.id)}
       />
       <div className="lista-tareas__texto">
         {/* Si "editandoTarea" es verdadero entonces nos mostrara un formulario, sino simplemente nos muestra el nombre de la tarea */}
