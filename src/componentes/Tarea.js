@@ -9,7 +9,7 @@ import {
 
 // Esta obteniendo la tarea que se creo dentro del map del componente "ListaTareas", no confundir con el estado "tareas"
 // Recomendacion: Llamar de otra forma a los estados para que no genere confusion
-const Tarea = ({ tarea, toggleCompletada }) => {
+const Tarea = ({ tarea, toggleCompletada, editarTarea, borrarTarea }) => {
   // Estado para manipular el boton de actualizar, tendra como valor por default 'false'
   const [editandoTarea, cambiarEditandoTarea] = useState(false);
 
@@ -36,6 +36,8 @@ const Tarea = ({ tarea, toggleCompletada }) => {
             action=""
             className="formulario-editar-tarea"
             onSubmit={handleSubmit}
+            // Funcion para editar tarea, recibe el id para identificar a que tarea editar y el estado 'nuevaTarea' para setearlo
+            onClick={() => editarTarea(tarea.id, nuevaTarea)}
           >
             <input
               type="text"
@@ -59,6 +61,7 @@ const Tarea = ({ tarea, toggleCompletada }) => {
         <FontAwesomeIcon
           icon={faTimes}
           className="lista-tareas__icono lista-tareas__icono-accion"
+          onClick={() => borrarTarea(tarea.id)}
         />
       </div>
     </li>

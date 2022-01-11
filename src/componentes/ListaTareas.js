@@ -16,6 +16,31 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
     );
   };
 
+  // Esta funcion la tenemos que pasar al componente "Tarea" para que funcione
+  // El nuevo texto es la 'nuevaTarea' en el componente "Tarea"
+  const editarTarea = (id, nuevoTexto) => {
+    cambiarTareas(
+      tareas.map((tarea) => {
+        if (id === tarea.id) {
+          return { ...tarea, texto: nuevoTexto };
+        }
+        return tarea;
+      })
+    );
+  };
+
+  const borrarTarea = (id) => {
+    cambiarTareas(
+      tareas.filter((tarea) => {
+        if (id !== tarea.id) {
+          return tarea;
+        }
+        // Devolvemos nada y elimina la tarea
+        return;
+      })
+    );
+  };
+
   return (
     <ul className="lista-tareas">
       {/* Muestra el texto de cada tarea del estado de "tareas" que estamos obteniendo en el componente*/}
@@ -28,6 +53,8 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
               key={tarea.id}
               tarea={tarea}
               toggleCompletada={toggleCompletada}
+              editarTarea={editarTarea}
+              borrarTarea={borrarTarea}
             />
           );
         })
