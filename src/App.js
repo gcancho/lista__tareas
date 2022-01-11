@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import FormularioTareas from "./componentes/FormularioTareas";
 import Header from "./componentes/Header";
+import ListaTareas from "./componentes/ListaTareas";
 
 function App() {
   const [tareas, cambiarTareas] = useState([
@@ -28,6 +29,7 @@ function App() {
     <div className="contenedor">
       <Header />
       <FormularioTareas tareas={tareas} cambiarTareas={cambiarTareas} />
+      <ListaTareas tareas={tareas} />
     </div>
   );
 }
