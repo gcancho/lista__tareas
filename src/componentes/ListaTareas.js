@@ -2,7 +2,7 @@ import React from "react";
 import Tarea from "./Tarea";
 
 //Este componente es una lista que contendra las tareas, a este componente se le pasa el estado "tareas" para mostrarlo con map
-const ListaTareas = ({ tareas, cambiarTareas }) => {
+const ListaTareas = ({ tareas, cambiarTareas, mostrarCompletadas }) => {
   // Esta funcion la tenemos que pasar al componente "Tarea" para que funcione
   const toggleCompletada = (id) => {
     cambiarTareas(
@@ -46,17 +46,32 @@ const ListaTareas = ({ tareas, cambiarTareas }) => {
       {/* Muestra el texto de cada tarea del estado de "tareas" que estamos obteniendo en el componente*/}
       {tareas.length > 0 ? (
         tareas.map((tarea) => {
-          // return <li key={tarea.id}>{tarea.texto}</li>;
-          // Creamos un componente para mejor orden y le pasamos los parametros al componente "Tarea"
-          return (
-            <Tarea
-              key={tarea.id}
-              tarea={tarea}
-              toggleCompletada={toggleCompletada}
-              editarTarea={editarTarea}
-              borrarTarea={borrarTarea}
-            />
-          );
+          if (mostrarCompletadas) {
+            // return <li key={tarea.id}>{tarea.texto}</li>;
+            // Creamos un componente para mejor orden y le pasamos los parametros al componente "Tarea"
+            return (
+              <Tarea
+                key={tarea.id}
+                tarea={tarea}
+                toggleCompletada={toggleCompletada}
+                editarTarea={editarTarea}
+                borrarTarea={borrarTarea}
+              />
+            );
+            //Si la tarea no esta completada, la devolvemos
+          } else if (!tarea.completada) {
+            return (
+              <Tarea
+                key={tarea.id}
+                tarea={tarea}
+                toggleCompletada={toggleCompletada}
+                editarTarea={editarTarea}
+                borrarTarea={borrarTarea}
+              />
+            );
+          }
+          // Si ya esta completada no la devolvemos
+          return;
         })
       ) : (
         <div className="lista-tareas__mensaje">No hay tareas agregadas</div>

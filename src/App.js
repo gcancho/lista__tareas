@@ -23,13 +23,23 @@ function App() {
     },
   ]);
 
+  // Estado para las tareas completadas
+  const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(false);
+
   console.log(tareas);
 
   return (
     <div className="contenedor">
-      <Header />
+      <Header
+        mostrarCompletadas={mostrarCompletadas}
+        cambiarMostrarCompletadas={cambiarMostrarCompletadas}
+      />
       <FormularioTareas tareas={tareas} cambiarTareas={cambiarTareas} />
-      <ListaTareas tareas={tareas} cambiarTareas={cambiarTareas} />
+      <ListaTareas
+        tareas={tareas}
+        cambiarTareas={cambiarTareas}
+        mostrarCompletadas={mostrarCompletadas}
+      />
     </div>
   );
 }
