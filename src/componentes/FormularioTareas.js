@@ -28,6 +28,8 @@ const FormularioTareas = ({ tareas, cambiarTareas }) => {
         },
       ]
     );
+    // Se limpia el input al mandar el formulario
+    cambiarInputTarea("");
   };
 
   return (
